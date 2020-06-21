@@ -358,7 +358,6 @@ void GameScene::menuAddFiveCallback(Ref *pSender)
 	{
 		/// 当前步数加5
 		//（只有当步数小于5的时候才能使用 才执行下面语句）
-		
 		if (numStep < 5)
 		{
 			propList[ADDFIVE]->setRemainTimes(0);
@@ -391,6 +390,8 @@ void GameScene::menuAddMagicCallback(Ref *pSender)
 	}
 	if (propList[ADDMAGIC]->getRemainTimes())
 	{
+		if (propOfNow == HAMMER)
+			propList[HAMMER]->setRemainTimes(1);
 		propOfNow = ADDMAGIC;
 		propList[ADDMAGIC]->setRemainTimes(0);
 		toolMagic--;
@@ -410,13 +411,14 @@ void GameScene::menuHammerCallback(Ref *pSender)
 		return;
 	if (staSprite)
 	{
-		
 		removeSelected();
 		staSprite = NULL;
 		locList.pop_back();
 	}
 	if (propList[HAMMER]->getRemainTimes())
 	{
+		if (propOfNow == ADDMAGIC)
+			propList[ADDMAGIC]->setRemainTimes(1);
 		propOfNow = HAMMER;
 		propList[HAMMER]->setRemainTimes(0);
 		toolHammer--;
